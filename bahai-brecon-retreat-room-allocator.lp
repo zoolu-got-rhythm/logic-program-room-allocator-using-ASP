@@ -7,16 +7,27 @@ person(john, male, shared).
 person(rachael, female, shared).
 person(kristin, female, shared).
 person(chris, male, shared).
+person(kyle, male, shared).
+
+
+1{person_with_id(X,Y) : id(X)}1 :- person(Y,_,_).
+
 
 room(a;b;c).
 
 n_of_people(N) :- N = #count{ X,Y,Z : person(X,Y,Z)}.
+id(1..N) :- n_of_people(N).
+
 
 % generate all possible candidates: how do i replace number 100 with n of people?
 % for now just put abritrarily high number (100)
 1 { allocate(N,R) : person(N,_,_) } 100 :- room(R).
 
 n_of_allocated(N) :- N = #count{ X,Y : allocate(X,Y)}.
+
+% filter out duplicate id's on person_with_id predicate
+:- person_with_id(X,N), person_with_id(X1,N2), X=X1, N!=N2.
+
 
 % 1 person can't be in 2 rooms at once
 :- allocate(N,R1), allocate(N,R2), R1!=R2, person(N,_,_).
@@ -36,5 +47,6 @@ n_of_allocated(N) :- N = #count{ X,Y : allocate(X,Y)}.
 
 
 #show allocate/2.
-#show n_of_people/1.
-#show n_of_allocated/1.
+%#show n_of_people/1.
+%#show n_of_allocated/1.
+%#show person_with_id/2.
