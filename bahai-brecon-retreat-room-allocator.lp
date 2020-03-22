@@ -30,25 +30,14 @@ n_of_allocated(N) :- N = #count{ X,Y : allocate(X,Y)}.
 % people with shared pref can't share room with people with private pref
 :- allocate(N1,R), allocate(N2,R), room(R), person(N1,_,P1), person(N2,_,P2), P1!=P2.
 
-
-
-
 % this statement below is kinda' working
 :- 2 #count { N,R,P : allocate(N,R), room(R), person(N,_,P), P==shared} 3.
 % :- 1 #count { N,R,P : allocate(N,R), room(R), person(N,_,P), P==private}.
 
-
-
-
+% everyone must be allocated a room
 :- n_of_allocated(X), n_of_people(Y), X!=Y.
 
-
-
-
-
 % :- not N #count{ M,P,C : allocate(M,P,C), C==expert} N, nOfExperts(N).
-
-
 
 #show allocate/2.
 #show n_of_people/1.
