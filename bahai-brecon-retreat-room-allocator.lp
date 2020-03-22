@@ -9,17 +9,12 @@ person(kristin, female, shared).
 person(chris, male, shared).
 person(kyle, male, shared).
 
-
-
-
 room(a;b;c).
 
 n_of_people(N) :- N = #count{ X,Y,Z : person(X,Y,Z)}.
 id(1..N) :- n_of_people(N).
 
 1{person_with_id(X,Y) : id(X)}1 :- person(Y,_,_).
-
-
 
 % generate all possible candidates: how do i replace number 100 with n of people?
 % for now just put abritrarily high number (100)
